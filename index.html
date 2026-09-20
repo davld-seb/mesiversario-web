@@ -1,20 +1,3 @@
-src="fotos/foto1.jpg"
-```[cite: 3]
-El navegador busca una carpeta llamada `fotos`. Sin embargo, en tu repositorio subiste los archivos sueltos en la raíz.
-
----
-
-### 2. La doble extensión (`.jpg.jpeg`)
-En GitHub tus archivos se llaman literalmente:
-`foto1.jpg.jpeg`, `foto2.jpg.jpeg`, etc.[cite: 2]  
-Pero en tu HTML pediste `.jpg`[cite: 3].
-
----
-
-### Código listo para copiar y pegar
-Para que todo funcione inmediatamente **sin tener que renombrar cada foto en GitHub**, actualicé las rutas de las imágenes en tu código cambiando `fotos/fotoX.jpg` a `fotoX.jpg.jpeg` (y dejando intacto el texto con los saltos `<br><br>` y estilos):
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -774,7 +757,7 @@ Para que todo funcione inmediatamente **sin tener que renombrar cada foto en Git
     <section class="ending">
 
         <img
-            src="foto10.jpg.jpeg"
+            src="foto8.jpg.jpeg"
             alt="Nuestra foto final"
             class="ending-photo"
         >
