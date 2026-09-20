@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dos meses</title>
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* =========================================================
+           COLORES PRINCIPALES
+           ========================================================= */
+
+        :root {
+            --verde-profundo: #102a23;
+            --verde: #173c32;
+            --verde-claro: #285346;
+            --marfil: #f3efe5;
+            --beige: #c9b98a;
+            --texto-suave: rgba(243, 239, 229, 0.72);
+        }
+
+
+        /* =========================================================
+           CONFIGURACIÓN GENERAL
+           ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--verde-profundo);
+            color: var(--marfil);
+            font-family: "DM Sans", sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--beige);
+            color: var(--verde-profundo);
+        }
+
+
+        /* =========================================================
+           PORTADA
+           ========================================================= */
+
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 25px;
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(40, 83, 70, 0.45),
+                    transparent 55%
+                ),
+                var(--verde-profundo);
+        }
+
+        .hero-date {
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--beige);
+            margin-bottom: 28px;
+        }
+
+        .hero-number {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(5rem, 25vw, 9rem);
+            line-height: 0.8;
+            font-weight: 400;
+            color: var(--marfil);
+            opacity: 0.95;
+        }
+
+        .hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2rem, 9vw, 3.5rem);
+            font-weight: 400;
+            margin-top: 25px;
+        }
+
+        .hero-message {
+            max-width: 330px;
+            margin-top: 25px;
+            color: var(--texto-suave);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--texto-suave);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 45px;
+            background: linear-gradient(
+                to bottom,
+                var(--beige),
+                transparent
+            );
+
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scaleY(0.7);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+
+        /* =========================================================
+           INTRODUCCIÓN
+           ========================================================= */
+
+        .intro {
+            min-height: 55vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 30px;
+            text-align: center;
+            background: var(--verde);
+        }
+
+        .intro-content {
+            max-width: 520px;
+        }
+
+        .small-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--beige);
+            margin-bottom: 25px;
+        }
+
+        .intro-message {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(1.7rem, 6vw, 2.5rem);
+            line-height: 1.45;
+            font-weight: 400;
+        }
+
+        .intro-note {
+            margin-top: 25px;
+            color: var(--texto-suave);
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+
+        /* =========================================================
+           GALERÍA
+           ========================================================= */
+
+        .gallery {
+            background: var(--verde-profundo);
+            padding: 10vh 0;
+        }
+
+        .photo-section {
+            min-height: 100svh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+
+            position: relative;
+        }
+
+        .photo-wrapper {
+            width: min(88vw, 550px);
+
+            position: relative;
+
+            transform: scale(0.88);
+            opacity: 0.35;
+
+            transition:
+                transform 0.8s ease,
+                opacity 0.8s ease;
+        }
+
+        .photo-section.active .photo-wrapper {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .photo {
+            width: 100%;
+            height: auto;
+            max-height: 78svh;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 4px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Número pequeño sobre la fotografía */
+
+        .photo-number {
+            position: absolute;
+            top: -28px;
+            left: 0;
+
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            color: var(--beige);
+        }
+
+        /* Texto opcional debajo */
+
+        .photo-caption {
+            margin-top: 20px;
+
+            font-family: "Playfair Display", serif;
+            font-size: 1.15rem;
+            line-height: 1.5;
+
+            color: var(--marfil);
+
+            text-align: center;
+        }
+
+        .photo-caption:empty {
+            display: none;
+        }
+
+
+        /* =========================================================
+           PEQUEÑOS SEPARADORES
+           ========================================================= */
+
+        .separator {
+            height: 35vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .separator-symbol {
+            color: var(--beige);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+
+        /* =========================================================
+           FINAL
+           ========================================================= */
+
+        .ending {
+            min-height: 100svh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 60px 25px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(40, 83, 70, 0.5),
+                    transparent 60%
+                ),
+                var(--verde-profundo);
+        }
+
+        .ending-photo {
+            width: min(75vw, 320px);
+            aspect-ratio: 4 / 5;
+
+            object-fit: cover;
+
+            border-radius: 3px;
+
+            margin-bottom: 45px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.35);
+        }
+
+        .ending-date {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--beige);
+            margin-bottom: 20px;
+        }
+
+        .ending-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2rem, 8vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .ending-message {
+            max-width: 350px;
+            margin-top: 25px;
+
+            font-size: 0.95rem;
+            line-height: 1.8;
+
+            color: var(--texto-suave);
+        }
+
+        .heart {
+            margin-top: 45px;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid rgba(201, 185, 138, 0.5);
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: var(--beige);
+
+            font-size: 1rem;
+        }
+
+
+        /* =========================================================
+           PIE DE PÁGINA
+           ========================================================= */
+
+        footer {
+            padding: 25px;
+            text-align: center;
+
+            background: var(--verde-profundo);
+
+            color: rgba(243, 239, 229, 0.35);
+
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+        }
+
+
+        /* =========================================================
+           ESCRITORIO
+           ========================================================= */
+
+        @media (min-width: 700px) {
+
+            .photo-section {
+                min-height: 110vh;
+            }
+
+            .photo-wrapper {
+                width: min(65vw, 600px);
+            }
+
+            .photo-caption {
+                font-size: 1.25rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         PORTADA
+         ========================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-date">
+            20 · 09 · 2026
+        </div>
+
+        <div class="hero-number">
+            II
+        </div>
+
+        <h1 class="hero-title">
+            Braulio y David
+        </h1>
+
+        <!-- ✏️ ESCRIBE AQUÍ TU PRIMER MENSAJE -->
+        <p class="hero-message">
+            -----------------------------
+        </p>
+
+
+        <div class="scroll-indicator">
+            <span>desliza</span>
+            <div class="scroll-line"></div>
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         INTRODUCCIÓN
+         ========================================================= -->
+
+    <section class="intro">
+
+        <div class="intro-content">
+
+            <div class="small-label">
+                NOSOTROS
+            </div>
+
+
+            <!-- ✏️ ESCRIBE AQUÍ LO QUE QUIERAS DECIR ANTES DE LAS FOTOS -->
+            <p class="intro-message">
+                UN POCO DE ESTOS DOS MESES
+            </p>
+
+
+            <!-- ✏️ OPCIONAL: PUEDES BORRAR ESTO SI NO QUIERES MÁS TEXTO -->
+            <p class="intro-note">
+                LLENOS DE GRANDES MOMENTOS
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         GALERÍA
+         ========================================================= -->
+
+    <main class="gallery">
+
+
+        <!-- ==================== FOTO 1 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    01
+                </span>
+
+                <img
+                    src="fotos/foto1.jpg"
+                    alt="Nuestra foto 1"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL: ESCRIBE ALGO SOBRE ESTA FOTO -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 2 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    02
+                </span>
+
+                <img
+                    src="fotos/foto2.jpg"
+                    alt="Nuestra foto 2"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 3 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    03
+                </span>
+
+                <img
+                    src="fotos/foto3.jpg"
+                    alt="Nuestra foto 3"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 4 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    04
+                </span>
+
+                <img
+                    src="fotos/foto4.jpg"
+                    alt="Nuestra foto 4"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 5 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    05
+                </span>
+
+                <img
+                    src="fotos/foto5.jpg"
+                    alt="Nuestra foto 5"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 6 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    06
+                </span>
+
+                <img
+                    src="fotos/foto6.jpg"
+                    alt="Nuestra foto 6"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 7 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    07
+                </span>
+
+                <img
+                    src="fotos/foto7.jpg"
+                    alt="Nuestra foto 7"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 8 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    08
+                </span>
+
+                <img
+                    src="fotos/foto8.jpg"
+                    alt="Nuestra foto 8"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 9 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    09
+                </span>
+
+                <img
+                    src="fotos/foto9.jpg"
+                    alt="Nuestra foto 9"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================== FOTO 10 ==================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-wrapper">
+
+                <span class="photo-number">
+                    10
+                </span>
+
+                <img
+                    src="fotos/foto10.jpg"
+                    alt="Nuestra foto 10"
+                    class="photo"
+                >
+
+                <!-- ✏️ OPCIONAL -->
+                <p class="photo-caption">
+                    ESCRIBE AQUÍ SI QUIERES
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FINAL
+         ========================================================= -->
+
+    <section class="ending">
+
+
+        <!-- ✏️ CAMBIA foto10.jpg POR LA FOTO QUE QUIERAS COMO CIERRE -->
+        <img
+            src="fotos/foto10.jpg"
+            alt="Nuestra foto final"
+            class="ending-photo"
+        >
+
+
+        <div class="ending-date">
+            20 · 09 · 2026
+        </div>
+
+
+        <!-- ✏️ PUEDES CAMBIAR ESTE TEXTO -->
+        <h2 class="ending-title">
+            ¡¿Cómo que ya son dos meses?!
+        </h2>
+
+
+        <!-- ✏️ ESCRIBE AQUÍ TU MENSAJE FINAL -->
+        <p class="ending-message">
+            jajajaj aprovechare este espacio para decir cosas que tal vez no siempre digo. Honestamente, me he dado cuenta que me suele costar poner en palabras todo lo que puedo llegar a sentir. Tal vez escribiendo se me de mejor jejeje y epa que lo menciono porque de alguna forma siento que tengo tanto por decir, pero no logro hallar las palabras; hay momentos como hoy o ayer donde me pongo a ver algunas fotos, y en mi fuero interno siento esa inmensa alegría de saber que existen y que son una parte de esas aventuras y aventuritas. Evidentemente no puedo contener el esbozo de una sonrisa nerviosa, mientras me sumerjo en muchos otros recuerdos de esos momentos. Risas, bromas, bullyng, historias, conversa y compincherías que ya forman parte de lo que lo que somos.
+<br><br>
+Y es ahí donde me doy cuenta de cuanto tengo por decir, comenzando tal vez por agradecer; porque sí, gracias por hacerme parte de tus días, gracias por acompañarme en mis ideas, gracias por hacerme dar cuenta que a veces no nos debe importar lo que diga el mundo de nosotros, gracias por motivarme a hacer ver el valor de mi trabajo, gracias porque aún cuando tal vez no lo sepas, tus historias de liderazgo me inspiran a querer llegar a ser tan valiente como tu; gracias porque cuando me siento inseguro, eres tu quien toma la iniciativa y me permite acompañarte un poco más. Tengo muchos más gracias, pero esos guardaré para otros mesiversarios jajajaja.
+<br><br>
+Lo cierto es que como te dije aquella noche, entre casi dormido y consciente jejejej, quiero compartir aventuras, momentos, risas y seguirte conociendo. 
+<br><br>
+Me gustas, me enamoras, te quierooo y probablemente hasta más que eso, pero como dije, guardaré detallitos para otros mesiversarios :3
+<br><br>
+Cuidate!! Espero con ansias verte esta semana y me cuentes de Cochancay.
+<br><br>
+Con cariño,
+<br><br>
+David
+
+        </p>
+
+
+        <div class="heart">
+            ♡
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PIE
+         ========================================================= -->
+
+    <footer>
+        20 · 09 · 2026
+    </footer>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ANIMACIÓN DE LAS FOTOS AL HACER SCROLL
+         ========================================================= -->
+
+    <script>
+
+        const sections = document.querySelectorAll(".photo-section");
+
+
+        const observer = new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("active");
+
+                    } else {
+
+                        entry.target.classList.remove("active");
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.45
+            }
+
+        );
+
+
+        sections.forEach((section) => {
+
+            observer.observe(section);
+
+        });
+
+    </script>
+
+
+</body>
+</html>
